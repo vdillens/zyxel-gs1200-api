@@ -25,3 +25,4 @@ services:
     App\Command\ZyxelCommand:
         $zyxelPassword: '%env(APP_ZYXEL_PASSWORD)%'    
         $zyxelIp: '%env(APP_ZYXEL_ROUTER_IP)%'
+        $zyxelDevice: '%env(APP_ZYXEL_DEVICE)%'
