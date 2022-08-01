@@ -193,6 +193,11 @@ class ZyxelCommand extends Command
         try {
             if ($this->checkLogoutZyxel($response)) {
                 if ($resultCommand === true) {
+                    $output->writeln([
+                        '============',
+                        '4/ Conclusion',
+                        'Command and logout OK',
+                    ]);
                     return Command::SUCCESS;
                 } else {
                     return Command::INVALID;
