@@ -1,4 +1,4 @@
-# ZYXEL-AUTOMATION #
+# ZYXEL-GS1200-API #
 
 The switch GS1200_5HP is a good switch with POE, but it doesn't provide an API system to automate actions.
 
