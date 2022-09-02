@@ -2,7 +2,7 @@
 
 The switch GS1200_5HP is a good switch with POE, but it doesn't provide an API system to automate actions.
 
-So, this program allow to control remotely the ports of a Zyxel's switch GS1200_5HP.
+So, this program allow to control remotely the ports of a Zyxel's switch GS1200_5HP v2, tested with firmware: V2.00(ABKN.1)C0.
 
 This program should work with the GS1200_8HP but is has not been tested.
 
