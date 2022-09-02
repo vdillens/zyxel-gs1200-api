@@ -3,7 +3,7 @@
 namespace App\Utils;
 
 /**
- * Utility for crypt a password for Zyxel router
+ * Utility for crypt a password for Zyxel switch
  */
 class ZyxelCrypt
 {

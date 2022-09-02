@@ -26,6 +26,6 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Command\ZyxelCommand:
         $zyxelPassword: '%env(APP_ZYXEL_PASSWORD)%'    
-        $zyxelIp: '%env(APP_ZYXEL_ROUTER_IP)%'
+        $zyxelIp: '%env(APP_ZYXEL_SWITCH_IP)%'
         $zyxelDevice: '%env(APP_ZYXEL_DEVICE)%'
 

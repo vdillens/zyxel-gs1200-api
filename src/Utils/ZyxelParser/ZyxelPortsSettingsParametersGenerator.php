@@ -17,15 +17,6 @@ class ZyxelPortsSettingsParametersGenerator implements ZyxelParametersGeneratorI
             throw new ZyxelPortsSettingsParametersGeneratorException("At least one parameter is required after the command " . self::COMMAND_NAME);
         }
 
-        /* 1  --> 0 / 1
-2  --> 0 / 2
-3 --> 0 / 4
-4 --> 0 / 8
-5 --> 0 / 16
-6 --> 0 / 32
-7 --> 0 / 64 
-8 --> 0 / 128
-*/
         //port_settings P1 all_default P2 state_enabled flow_ctl_enabled poe_enabled speed_10
         //port_settings all_default
 
@@ -67,12 +58,9 @@ class ZyxelPortsSettingsParametersGenerator implements ZyxelParametersGeneratorI
     }
     private function checkPortsArguments(string $device, array $arguments, int $portToUpdate): void
     {
-        // Check that we have at least two arguments (the port and 1 argument to update)
-        //dump($arguments); @todo output debug here
         if (count($arguments) < 2) {
             throw new ZyxelPortsSettingsParametersGeneratorException("at least one argument is needed after the port name");
         }
-
         // Check if POE can be handle
         if ($device == ZyxelDeviceType::GS1200_5HP && $portToUpdate == 4 && (in_array("poe_enabled", $arguments) || in_array("poe_disabled", $arguments))) {
             throw new ZyxelPortsSettingsParametersGeneratorException("POE not available on the last port");
@@ -85,8 +73,6 @@ class ZyxelPortsSettingsParametersGenerator implements ZyxelParametersGeneratorI
     {
         $portToUpdate = (int) substr($arguments[0], 1, 1) - 1;
         $this->checkPortsArguments($device, $arguments, $portToUpdate);
-        //dump("port to update");
-        //dump($portToUpdate);
         $parameter_speed_name = "g_port_speed" . $portToUpdate;
         foreach ($arguments as $argument) {
             switch ($argument) {

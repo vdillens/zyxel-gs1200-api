@@ -67,6 +67,12 @@ class ZyxelCommand extends Command
         $this->zyxelPassword = $zyxelPassword;
         $this->zyxelDevice = $zyxelDevice;
     }
+    /**
+     * Check login with the switch's response
+     *
+     * @param ResponseInterface $response The response of the switch
+     * @return boolean
+     */
     private function checkLoginZyxel(ResponseInterface $response): bool
     {
         // Check StatusCode
@@ -87,6 +93,12 @@ class ZyxelCommand extends Command
         }
         return true;
     }
+    /**
+     * Check if logout with the switch is ok
+     *
+     * @param ResponseInterface $response The response of the switch
+     * @return boolean
+     */
     private function checkLogoutZyxel(ResponseInterface $response): bool
     {
         // Check StatusCode
@@ -102,6 +114,15 @@ class ZyxelCommand extends Command
             return true;
         }
     }
+    /**
+     * Launch the command with the switch
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @param string $cookieAuth
+     * @param string $baseUrl
+     * @return void
+     */
     private function launchCommand(InputInterface $input, OutputInterface $output, string $cookieAuth, string $baseUrl)
     {
         $zyxelDevice = ($input->getOption('device')) ? $input->getOption('device') : $this->zyxelDevice;
@@ -128,10 +149,17 @@ class ZyxelCommand extends Command
             ]
         );
 
-        // We wait 2 seconds in order to let the router do the action
+        // We wait 2 seconds in order to let the switch do the action
         sleep(2);
         return true;
     }
+    /**
+     * Execution of the command
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return integer
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $baseUrl = 'http://' . $this->zyxelIp;
@@ -174,7 +202,7 @@ class ZyxelCommand extends Command
         ]);
         $resultCommand = $this->launchCommand($input, $output, $cookieAuth, $baseUrl);
 
-        // Finally, We need to logout properly, otherwise the router will block the acces to the GUI
+        // Finally, We need to logout properly, otherwise the switch will block the acces to the GUI
         $output->writeln([
             '============',
             '3/ Logout',
@@ -207,7 +235,7 @@ class ZyxelCommand extends Command
             $output->writeln([
                 'Error while logging out : ',
                 $ex->getMessage(),
-                'Caution : if the program is still logging in, you may reboot the router in order to reset the session.'
+                'Caution : if the program is still logging in, you may reboot the switch in order to reset the session.'
             ]);
             return Command::FAILURE;
         }

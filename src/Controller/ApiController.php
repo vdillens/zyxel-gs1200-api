@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -35,6 +34,7 @@ class ApiController extends AbstractController
 
         $inputArray = ['command' => 'app:zyxel', 'cmd' => array_merge([$cmd], $args)];
 
+        // Check options
         if ($request->get('zyxel_ip') && $request->get('zyxel_password')) {
             $inputArray['--ip'] = $request->get('zyxel_ip');
             $inputArray['--password'] = $request->get('zyxel_password');
@@ -43,11 +43,7 @@ class ApiController extends AbstractController
             $inputArray['--device'] = $request->get('zyxel_device');
         }
 
-        $input = new ArrayInput(
-            $inputArray
-            // (optional) pass options to the command
-            //'--bar' => 'fooValue',
-        );
+        $input = new ArrayInput($inputArray);
 
         // You can use NullOutput() if you don't need the output
         $output = new BufferedOutput();
